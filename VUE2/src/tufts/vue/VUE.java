@@ -1151,24 +1151,6 @@ public class VUE
         //-------------------------------------------------------
 
         Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
-        
-        if (!SKIP_SPLASH) {
-            // start in another thread as may pop dialog
-            // that will block further progress on the
-            // run-out of main
-            final Thread versionThread = new Thread("version-check") {
-                    public void run() {
-                        if (DEBUG.THREAD) Log.debug("version-check kicked off");
-                        checkLatestVersion();
-                    }
-                };
-            versionThread.setPriority(Thread.MIN_PRIORITY);
-            versionThread.setDaemon(true);
-            // delay kickoff until after any already outstanding AWT invocations (e.g., map open's, data source loads)
-            GUI.invokeAfterAWT(new Runnable() { public void run() {            
-                versionThread.start();
-            }});
-        }
 
 //         try {
 //             // any immediate user UI requests (mouse-click) for a tufts.vue.DataSource
@@ -3826,6 +3808,15 @@ public class VUE
      */
     
    public static void checkLatestVersion() {
+	   	// Apollia's note, Feb. 15, 2017, 7:13 PM EST:
+	   	//
+	   	// Getting rid of the version check, because
+	   	// software should never get on the internet
+   		// without the user's approval
+	   
+	   Log.info("Not checking for latest version of VUE");
+	   return;
+	/*
        Log.info("Checking for latest version of VUE");
         try {
             URL url = new URL(VueResources.getString("vue.release.url"));
@@ -3838,18 +3829,19 @@ public class VUE
             if (DEBUG.Enabled) Log.debug("got current version id [" + version + "]");
             final String currentVersion = VueResources.getString("vue.version").trim();
             final String newVersion = version.trim();
-            if (!isHigherVersion(currentVersion, newVersion))
-            {
+            */
+           // if (!isHigherVersion(currentVersion, newVersion))
+         //   {
             	//final ShowAgainDialog sad = new ShowAgainDialog(VUE.getApplicationFrame(),"checkForNewVersion2","New Release Available","Remind me later",(String)null);
-            	final ShowAgainDialog sad = new ShowAgainDialog(VUE.getApplicationFrame(),"checkForNewVersion2","New Release Available","Get latest version","Close Window");
-            	JPanel panel = new JPanel(new GridLayout(1,1));
+           // 	final ShowAgainDialog sad = new ShowAgainDialog(VUE.getApplicationFrame(),"checkForNewVersion2","New Release Available","Get latest version","Close Window");
+           // 	JPanel panel = new JPanel(new GridLayout(1,1));
             	/*JLabel vLabel = new  JLabel("<html>A newer version of VUE is available ("
                                             + newVersion
                                             + ") &nbsp; <font color=\"#20316A\"><u>Get the latest version</u></font></html", JLabel.LEFT);*/
-            	JLabel vLabel = new  JLabel("<html>"+VueResources.getString("jlabel.newversion") +" ("
-                        + newVersion
-                        + ") &nbsp; <font color=\"#20316A\"></html", JLabel.LEFT);
-            	if(Util.isMacPlatform()){
+          //  	JLabel vLabel = new  JLabel("<html>"+VueResources.getString("jlabel.newversion") +" ("
+          //              + newVersion
+         //               + ") &nbsp; <font color=\"#20316A\"></html", JLabel.LEFT);
+         /*   	if(Util.isMacPlatform()){
             		panel.setPreferredSize(new Dimension(425,25));
             		panel.setSize(new Dimension(425,25));
             		panel.setMinimumSize(new Dimension(425,25));
@@ -3890,6 +3882,7 @@ public class VUE
         }catch(Throwable t) {
             Log.error("Error Checking latest VUE release:", t);
         }
+        */
    }
    // check if v1 > v2
    private static boolean isHigherVersion(String v1,String v2) {
