@@ -1332,7 +1332,7 @@ public class Actions implements VueConstants
       	{    	if (VUE.askSaveIfModified(VUE.getActiveMap())) {
       	      netscape.javascript.JSObject win = (netscape.javascript.JSObject) netscape.javascript.JSObject.getWindow(VueApplet.getInstance());
       	      String[] arguments = { VUE.getActiveMap().getFile().getAbsolutePath(),VUE.getActiveMap().getDisplayLabel() };
-      	      win.call("doImportMap", (Object)arguments);
+      	      win.call("doImportMap", (Object[])arguments);
       	     // System.out.println("JS CALLED");
       		}
       	}
@@ -1352,7 +1352,7 @@ public class Actions implements VueConstants
     				//import from url
     				netscape.javascript.JSObject win = (netscape.javascript.JSObject) netscape.javascript.JSObject.getWindow(VueApplet.getInstance());
   	      	      String[] arguments = { spec };
-  	      	      win.call("doImportUrl", (Object)arguments);
+  	      	      win.call("doImportUrl", (Object[])arguments);
 
     			}
     			else
@@ -1360,7 +1360,7 @@ public class Actions implements VueConstants
     				//import from file..
     				netscape.javascript.JSObject win = (netscape.javascript.JSObject) netscape.javascript.JSObject.getWindow(VueApplet.getInstance());
   	      	      String[] arguments = { spec, r.getTitle() };
-  	      	      win.call("doImportFile", (Object)arguments);
+  	      	      win.call("doImportFile", (Object[])arguments);
 
     			}
     		}
