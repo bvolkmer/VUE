@@ -6534,9 +6534,8 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
          *  true if we hit one -- false otherwise
          */
         private boolean checkAndHandleControlPointPress(MapMouseEvent e) {
-            Iterator icl = VueSelection.getControlListeners().iterator();
-            while (icl.hasNext()) {
-                if (checkAndHandleControlListenerHits((LWSelection.ControlListener)icl.next(), e, true))
+            for (LWSelection.ControlListener controlListener : VueSelection.getControlListeners()) {
+                if (checkAndHandleControlListenerHits(controlListener, e, true))
                     return true;
             }
             if (resizeControl.active) {
@@ -7962,10 +7961,8 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
 
                     if (e.isControlDown()) {
                         List<LWComponent> childList = new ArrayList();
-                        Iterator<LWComponent> itr = list.iterator();
 
-                        while (itr.hasNext()) {
-                            LWComponent selectedItem = itr.next();
+                        for (LWComponent selectedItem : list) {
                             if (selectedItem.hasChildren()) {
                                 childList.addAll(selectedItem.getChildren());
                             }
