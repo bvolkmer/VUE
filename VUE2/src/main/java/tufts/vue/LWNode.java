@@ -2331,8 +2331,7 @@ public class LWNode extends LWContainer
 
         float colX = baseX;
         float colY = baseY;
-        for (int x = 0; x < cols.length; x++) {
-            Column col = cols[x];
+        for (Column col : cols) {
             if (col == null)
                 break;
             col.layout(colX, colY, nColumn == 1);
