@@ -51,3 +51,5 @@ signing_code/VUE.pkg
 .settings/
 .classpath
 .project
+
+*.iml
