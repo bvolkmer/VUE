@@ -74,6 +74,7 @@ import edu.tufts.vue.preferences.ui.PreferencesDialog;
  * @version March 2004
  */
 
+@SuppressWarnings("RedundantIfStatement")
 public class Actions implements VueConstants
 {
     private static final org.apache.log4j.Logger Log = org.apache.log4j.Logger.getLogger(Actions.class);
@@ -88,13 +89,13 @@ public class Actions implements VueConstants
 
     public static final String MENU_INDENT = "  ";
     
-    static final private KeyStroke keyStroke(int vk, int mod) {
+    static private KeyStroke keyStroke(int vk, int mod) {
         return KeyStroke.getKeyStroke(vk, mod);
     }
-    static final private KeyStroke keyStroke(int vk) {
+    static private KeyStroke keyStroke(int vk) {
         return keyStroke(vk, 0);
     }
-    private static final String local(String resourceKey) {
+    private static String local(String resourceKey) {
         return VueResources.local(resourceKey);
     }
     
@@ -112,7 +113,7 @@ public class Actions implements VueConstants
 		}
     };
     
-    private static final File getFileForPresentation(String type)
+    private static File getFileForPresentation(String type)
     {
     	if (VUE.getActivePathway() == null || VUE.getActivePathway().getEntries().isEmpty())
     	{
@@ -153,11 +154,11 @@ public class Actions implements VueConstants
         	return null;
 		
     }
-    private static final File getFileForActiveMap()
+    private static File getFileForActiveMap()
     {
     	return getFileForActiveMap(null);
     }
-    private static final File getFileForActiveMap(String type)
+    private static File getFileForActiveMap(String type)
     {
     	if (VUE.getActiveMap() == null)
     	{
@@ -314,8 +315,9 @@ public class Actions implements VueConstants
             }
             dialog.setVisible(true);
         }
-    };
-    public static final VueAction Preferences = new PreferenceAction(); 
+    }
+
+    public static final VueAction Preferences = new PreferenceAction();
     //-------------------------------------------------------
     // Selection actions
     //-------------------------------------------------------
@@ -750,7 +752,7 @@ public class Actions implements VueConstants
         boolean enabledFor(LWSelection s) {
             if (!s.containsType(LWNode.class))
                 return false;
-            return s.size() == 1 ? ((LWNode)s.first()).isAutoSized() == false : true;
+            return s.size() == 1 ? !((LWNode) s.first()).isAutoSized() : true;
         }
         public void act(LWNode c) {
             c.setAutoSized(true);
@@ -1192,7 +1194,7 @@ public class Actions implements VueConstants
         	VUE.getInfoDock().setRolledUp(false,true);
         }
         //public void act() { VUE.ObjectInspector.setVisible(true); }
-    };
+    }
     /*
     public static final LWCAction AddImageAction = new LWCAction(VueResources.local("mapViewer.componentMenu.addImage.label")) {
         public void act(LWComponent c) 
@@ -1837,10 +1839,9 @@ public class Actions implements VueConstants
         	VUE.getInspectorPane().showNotesView();
         	}
         //public void act() { VUE.ObjectInspector.setVisible(true); }
-    };
-    
-    
-    
+    }
+
+
     public static final Action InfoAction = new VueAction(VueResources.local("mapViewer.componentMenu.info.label")) {
         public void act() { 
         	VUE.getInspectorPane().showInfoView();
@@ -2558,7 +2559,7 @@ public class Actions implements VueConstants
         
         
         
-    };
+    }
 
     public static LWComponent[] sortByX(LWComponent[] array) {
         java.util.Arrays.sort(array, LWComponent.XSorter);
@@ -3237,7 +3238,7 @@ public class Actions implements VueConstants
             }
         }
             
-    };
+    }
 
     public static final ClusterAction MakeCluster = new ClusterAction("menu.format.layout.makecluster", keyStroke(KeyEvent.VK_PERIOD, ALT)) {
             @Override
@@ -3570,7 +3571,7 @@ public class Actions implements VueConstants
     private static final LWCAction ImageShow = new ImageAdjustAction("action.image.show", IMAGE_SHOW);
     
 
-    private static final int ImageSizes[] = { 1024, 768, 640, 512, 384, 256, 128, 64, 32, 16 };
+    private static final int[] ImageSizes = { 1024, 768, 640, 512, 384, 256, 128, 64, 32, 16 };
 
     public static final Action[] IMAGE_MENU_ACTIONS;
     public static final Action[] NODE_FORMAT_MENU_ACTIONS = {ResizeNode};
@@ -3637,7 +3638,7 @@ public class Actions implements VueConstants
             {
             	GUI.reloadGraphicsInfo();
             	GUI.invokeAfterAWT(new Runnable() { public void run() {
-            		DockWindow acrossTop[] = new DockWindow[VUE.acrossTop.length];
+            		DockWindow[] acrossTop = new DockWindow[VUE.acrossTop.length];
             		System.arraycopy(VUE.acrossTop, 0, acrossTop, 0, VUE.acrossTop.length);
             		//acrossTop[VUE.acrossTop.length] = VUE.getMergeMapsDock();
             		//acrossTop[VUE.acrossTop.length+1] = VUE.getFormatDock();
@@ -4544,7 +4545,7 @@ public class Actions implements VueConstants
             VUE.getContentDock().setVisible(true);
             VUE.getContentPanel().showResourcesTab();
         }
-    };
+    }
 
     public static final Action DatasetsAction = new DatasetsActionClass(MENU_INDENT + VueResources.local("dockWindow.contentPanel.datasets.title"));
 
@@ -4557,7 +4558,7 @@ public class Actions implements VueConstants
             VUE.getContentDock().setVisible(true);
             VUE.getContentPanel().showDatasetsTab();
         }
-    };
+    }
 
     public static final Action OntologiesAction = new OntologiesActionClass(MENU_INDENT + VueResources.local("dockWindow.contentPanel.ontologies.title"));
 
@@ -4570,5 +4571,5 @@ public class Actions implements VueConstants
             VUE.getContentDock().setVisible(true);
             VUE.getContentPanel().showOntologiesTab();
         }
-    };
+    }
 }
