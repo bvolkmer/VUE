@@ -43,7 +43,7 @@ def resourceProps = file('src/main/resources/tufts/vue/VueResources.properties')
 version = resourceProps['vue.version']
 
 
-sourceCompatibility = 1.7
+sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 
