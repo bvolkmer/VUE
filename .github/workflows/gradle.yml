@@ -7,7 +7,7 @@ on:
   push:
     branches: [master, gradle-and-fixes]
   pull_request:
-    branches: [master]
+    branches: [master, gradle-and-fixes]
 
 jobs:
   build:
