@@ -66,8 +66,10 @@ launch4j {
     copyConfigurable = project.tasks.shadowJar.outputs.files
     jar = "lib/" + project.tasks.shadowJar.archiveName
     downloadUrl = 'https://adoptopenjdk.net/'
-    xmlFileName = "${projectDir}/Nullsoft-Installer/VUE-launch4j.xml"
     icon = "${projectDir}/Nullsoft-Installer/VUE.ico"
+    if (hasProperty("console")) {
+        headerType = "console"
+    }
 }
 
 createAllExecutables.dependsOn(shadowJar)
