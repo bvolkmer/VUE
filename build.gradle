@@ -2,12 +2,12 @@
 buildscript {
     repositories {
         jcenter()
+        gradlePluginPortal()
+        mavenCentral()
     }
     dependencies {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
-        classpath 'com.github.jengelman.gradle.plugins:shadow:6.0.0'
-        classpath 'edu.sc.seis.gradle:launch4j:2.4.6'
     }
 }
 
@@ -15,8 +15,4 @@ allprojects {
     repositories {
         jcenter()
     }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
 }
