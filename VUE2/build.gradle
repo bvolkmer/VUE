@@ -57,7 +57,6 @@ jar {
         attributes 'Implementation-Title': project.name
         attributes 'Implementation-Version': project.version
         attributes 'Main-Class': project.mainClassName
-        attributes 'Class-Path': configurations.runtime.collect { it.getName() }.join(' ')
     }
 }
 
